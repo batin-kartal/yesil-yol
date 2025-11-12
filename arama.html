@@ -47,64 +47,159 @@ nav .profile {
   justify-content: center;
   font-weight: bold;
 }
-.main {
-  margin-top: 80px;
+.container {
+  display: flex;
+  margin-top: 100px;
   padding: 20px;
-  max-width: 800px;
+  max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
+  gap: 20px;
 }
-select, button {
-  padding: 10px;
-  margin: 10px 0;
+.main {
+  flex: 2;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.sidebar {
+  flex: 1;
+  background: #e0f2f1;
+  padding: 20px;
+  border-radius: 10px;
+  height: fit-content;
+}
+h1 {
+  color: #004d40;
+  text-align: center;
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+button {
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
   font-size: 1rem;
 }
+button:hover {
+  background-color: #004d40;
+}
 .result {
-  background: white;
+  background: #e0f2f1;
   padding: 15px;
   margin-top: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 }
 </style>
 </head>
 <body>
   <nav>
-    <img src="icon2.png" alt="Logo" class="logo">
+    <img src="logo.png" alt="Logo" class="logo">
     <div class="menu">
       <a href="index.html">Ana Sayfa</a>
       <a href="destek.html">Destek</a>
-      <a href="#">...</a>
       <a href="arama.html">Bilgi Arama</a>
-      <a href="#">Hakkında</a>
+      <a href="ulasim.html">Bize Ulaşın</a>
     </div>
     <div class="profile">P</div>
   </nav>
 
-  <div class="main">
-    <h1>arama motoru</h1>
-    <p>d</p>
+  <div class="container">
+    <div class="main">
+      <h1>Madde Bilgi Arama</h1>
+      <p>Belirtileri seçin, sistem olası madde türlerini ve yan etkilerini gösterir.</p>
 
-    <label for="semptom">seç:</label>
-    <select id="semptom">
-      <option value="">Seç</option>
-      <option value="iştahsızlık">İştahsızlık</option>
-      <option value="uykusuzluk">Uykusuzluk</option>
-      <option value="halüsinasyon">Halüsinasyon</option>
-      <option value="anksiyete">Anksiyete</option>
-    </select>
-    <button onclick="test()">Ara</button>
+      <div class="checkbox-group" id="semptomlar">
+        <label><input type="checkbox" value="iştahsızlık"> İştahsızlık</label>
+        <label><input type="checkbox" value="uykusuzluk"> Uykusuzluk</label>
+        <label><input type="checkbox" value="halüsinasyon"> Halüsinasyon</label>
+        <label><input type="checkbox" value="anksiyete"> Anksiyete</label>
+        <label><input type="checkbox" value="enerji_artışı"> Aşırı Enerji</label>
+        <label><input type="checkbox" value="aşırı_neşe"> Aşırı Neşe</label>
+        <label><input type="checkbox" value="saldırganlık"> Saldırganlık</label>
+        <label><input type="checkbox" value="yorgunluk"> Aşırı Yorgunluk</label>
+      </div>
 
-    <div id="results" class="result"></div>
+      <button onclick="ara()">Ara</button>
+      <div id="results" class="result"></div>
+    </div>
+
+    <div class="sidebar">
+      <h3>Seçilen Belirtiler</h3>
+      <ul id="selectedList"></ul>
+    </div>
   </div>
- 
+
 <script>
-function test() {
+const maddeler = {
+  "Uyarıcılar (kokain, amfetamin)": {
+    etkiler: ["enerji_artışı", "uykusuzluk", "iştahsızlık", "aşırı_neşe"],
+    aciklama: "Uyarıcılar geçici olarak beyin aktivitesini artırır. Uzun vadede kalp sorunları, uykusuzluk ve yorgunluk yaratabilir."
+  },
+  "Halüsinojenler (LSD, mantar, DMT)": {
+    etkiler: ["halüsinasyon", "anksiyete", "aşırı_neşe"],
+    aciklama: "Algı bozuklukları, gerçeklikten kopma ve ruhsal dengesizlik yaratabilir."
+  },
+  "Depresanlar (alkol, yatıştırıcılar, eroin)": {
+    etkiler: ["yorgunluk", "iştahsızlık", "uykusuzluk"],
+    aciklama: "Vücut fonksiyonlarını yavaşlatır. Bağımlılık riski yüksektir."
+  },
+  "Kannabis (esrar, marihuana)": {
+    etkiler: ["iştahsızlık", "anksiyete", "halüsinasyon"],
+    aciklama: "Zihinsel bulanıklık, geçici algı değişimi ve dikkat dağınıklığı yapabilir."
+  }
+};
 
+const checkboxes = document.querySelectorAll("#semptomlar input");
+const selectedList = document.getElementById("selectedList");
 
+checkboxes.forEach(box => {
+  box.addEventListener("change", () => {
+    const selected = Array.from(checkboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.parentElement.textContent.trim());
+    selectedList.innerHTML = selected.map(s => `<li>${s}</li>`).join("");
+  });
+});
+
+function ara() {
+  const selected = Array.from(checkboxes)
+    .filter(cb => cb.checked)
+    .map(cb => cb.value);
+  const resultsDiv = document.getElementById("results");
+
+  if (selected.length === 0) {
+    resultsDiv.innerHTML = "<p>Lütfen en az bir belirti seçin.</p>";
+    return;
+  }
+
+  let bulunan = [];
+  for (let [madde, data] of Object.entries(maddeler)) {
+    const etkiler = data.etkiler;
+    const sec = selected.every(s => etkiler.includes(s));
+    if (sec) bulunan.push({ madde, aciklama: data.aciklama });
+  }
+
+  if (bulunan.length === 0) {
+    resultsDiv.innerHTML = "<p>Seçilen belirtilere uygun madde bulunamadı.</p>";
+  } else {
+    resultsDiv.innerHTML = bulunan.map(b =>
+      `<h3>${b.madde}</h3><p>${b.aciklama}</p>`
+    ).join("<hr>");
+  }
 }
-
-
 </script>
 </body>
 </html>

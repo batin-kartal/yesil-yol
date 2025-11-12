@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>madde</title>
+<title>Yeşil Yol</title>
 <style>
 body {
   margin: 0;
@@ -47,8 +47,20 @@ nav .profile {
   justify-content: center;
   font-weight: bold;
 }
+.header-logo {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header-logo img {
+  width: 300px;
+  max-width: 80%;
+  height: auto;
+  border-radius: 10px;
+}
 .main {
-  margin-top: 80px;
+  margin-top: 30px;
   padding: 20px;
   max-width: 800px;
   margin-left: auto;
@@ -67,38 +79,50 @@ nav .profile {
 .story p {
   line-height: 1.6;
 }
+.story img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
 </style>
 </head>
 <body>
   <nav>
-    <img src="icon.png" alt="Logo" class="logo">
+    <img src="logo.png" alt="Logo" class="logo">
     <div class="menu">
-      <a href="#">Ana Sayfa</a>
+      <a href="index.html">Ana Sayfa</a>
       <a href="destek.html">Destek</a>
-      <a href="#">...</a>
       <a href="arama.html">Bilgi Arama</a>
-      <a href="#">Hakkında</a>
+      <a href="ulasim.html">Bize Ulaşın</a>
     </div>
-    <div class="profile">P</div>
+    <div class="profile"> </div>
   </nav>
 
+  <div class="header-logo">
+    <img src="logo.png" alt="Yeşil Yol Logo">
+  </div>
+
   <div class="main">
-    <h1>...'na Hoş Geldiniz</h1>
-    <p>yazı falan</p>
+    <h1>Yeşil Yol'a Hoş Geldiniz</h1>
+    <p>Bu platform, bağımlılıkla mücadele eden bireylerin hikayelerini paylaşarak umut ve ilham vermek amacıyla oluşturulmuştur. Bunun dışında ihtiyacı olan insanlara randevu alımı veya psikolog görüşmesi ayarlanması yapılabilmektedir.</p>
+    <p>Üstte bulunan navigasyon butonlarından bize ulaşabilir, randevu veya seans için doktorlara veya hastanelere göz atabilir, madde bağımlılığı hakkında daha fazla bilgi sahibi olmak için arama motorunu kullabilirsiniz. Altta ise ilham verici hikayeler okuyabilirsiniz.</p>
+    <div class="a.png">
+      <h2>Hikaye 1</h2>
+      <img src="https://via.placeholder.com/800x400?text=Hikaye+1+Görseli" alt="Hikaye 1">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer congue, enim at sagittis facilisis, ligula urna venenatis massa, nec ultricies sem lacus in magna. Pellentesque tristique leo at sapien suscipit, sit amet ullamcorper turpis eleifend. Donec tincidunt justo nec sapien ultricies, vitae ultrices purus viverra. Nunc varius ante sit amet risus mattis, nec feugiat enim sodales. Suspendisse ut sapien at lorem viverra tempor vitae nec enim.</p>
+    </div>
 
-    <div class="story">
-      <h2>miyav</h2>
-      <p>p</p>
+    <div class="a.png">
+      <h2>Hikaye 2</h2>
+      <img src="https://via.placeholder.com/800x400?text=Hikaye+2+Görseli" alt="Hikaye 2">
+      <p>Curabitur rhoncus magna non nisl condimentum, eget convallis justo aliquet. Aenean et gravida nisl. Sed vestibulum dolor et lacus cursus, nec rhoncus felis malesuada. Cras sagittis, orci ac pulvinar facilisis, nulla sem gravida nulla, ut pretium odio ante at elit. Fusce tincidunt tincidunt ipsum, id volutpat neque pretium ut. Vivamus mattis, magna sed vestibulum tempus, augue erat venenatis velit, eget cursus metus lorem ac lectus.</p>
     </div>
 
     <div class="story">
-      <h2>hikaye 2</h2>
-      <p>miyav miyav miyav</p>
-    </div>
-
-    <div class="story">
-      <h2>hikaye 3</h2>
-      <p>miyav miyav miyav</p>
+      <h2>Hikaye 3</h2>
+      <img src="a.png" alt="Hikaye 3">
+      <p>Praesent ut turpis in massa gravida dapibus. In condimentum, sapien a tincidunt suscipit, ex nunc laoreet augue, et commodo neque lacus in urna. Mauris a dolor ut justo sagittis ullamcorper. Nam vel varius magna. Ut sed justo vel lorem interdum posuere. Nullam non erat sapien. Cras ultricies, nibh in porttitor posuere, lacus neque luctus nisi, eget pharetra magna libero in ex.</p>
     </div>
   </div>
 </body>
